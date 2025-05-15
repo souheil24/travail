@@ -1,0 +1,19 @@
+<svg viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond transparent -->
+  <rect width="500" height="120" fill="transparent" />
+  
+  <!-- Icône de tri/classification -->
+  <g transform="translate(30, 35)">
+    <circle cx="25" cy="25" r="25" fill="#4A86E8" />
+    <path d="M12,25 L38,25 M20,15 L12,25 L20,35 M30,15 L38,25 L30,35" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  
+  <!-- Texte "SentiSort" -->
+  <text x="85" y="65" font-family="Arial, sans-serif" font-weight="bold" font-size="40" fill="#FFFFFF">SentiSort</text>
+  
+  <!-- Texte "AI" -->
+  <text x="290" y="65" font-family="Arial, sans-serif" font-weight="bold" font-size="40" fill="#4A86E8">AI</text>
+  
+  <!-- Tagline -->
+  <text x="85" y="90" font-family="Arial, sans-serif" font-size="16" fill="#CCCCCC">Classification intelligente de commentaires</text>
+</svg>

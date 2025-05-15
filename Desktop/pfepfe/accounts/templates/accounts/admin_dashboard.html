@@ -1,0 +1,2665 @@
+{% load static %}
+<!DOCTYPE html>
+<html data-wf-domain="get-neuraflow.webflow.io" data-wf-page="6735ec32acab9d477bc254ad"
+    data-wf-site="6735ec32acab9d477bc254a6" data-wf-status="1" lang="en" data-wf-locale="en"
+    class="w-mod-js w-mod-ix wf-sora-n4-active wf-sora-n6-active wf-sora-n7-active wf-sora-n5-active wf-sora-n8-active wf-active">
+
+<head>
+    <style>
+        .wf-force-outline-none[tabindex="-1"]:focus {
+            outline: none;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>SentiSort AI - HTML website template</title>
+    <meta
+        content="Boost productivity with our AI-powered SaaS app featuring smart data input, automation workflow tools, and advanced analytics. Optimize your workflow and make data-driven decisions effortlessly."
+        name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link
+        href="https://cdn.prod.website-files.com/6735ec32acab9d477bc254a6/css/get-neuraflow.webflow.shared.4b6723de5.css"
+        rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sora:regular,500,600,700,800" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript">WebFont.load({ google: { families: ["Sora:regular,500,600,700,800"] } });</script>
+    <script
+        type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
+    <link href="https://cdn.prod.website-files.com/6735ec32acab9d477bc254a6/67f251b8af6e43269dcabdaf_favicon.png"
+        rel="shortcut icon" type="image/x-icon">
+    <link href="https://cdn.prod.website-files.com/6735ec32acab9d477bc254a6/67f251ef10db00cd6a155308_webclip.png"
+        rel="apple-touch-icon">
+    <style type="text/css" id="operaUserStyle"></style>
+    <link rel="stylesheet" href="{% static 'accounts/style_3.css' %}">
+
+    <style>
+        .profile-page {
+            display: none; /* Par défaut, la page est masquée */
+            padding: 20px;
+            background-color: #000000; /* Couleur de fond noir */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto; /* Centrer horizontalement */
+            background-color: rgba(0, 0, 0, 0.7); /* Noir transparent */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            border: 1px solid #0080ff; /* Bordure bleue */
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-pic-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+        
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; /* Cercle */
+            object-fit: cover;
+            border: 2px solid #0080ff; /* Bordure bleue */
+        }
+        
+        .change-pic-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        #file-input {
+                display: none; /* Masque l'élément */
+            }
+        
+        .save-btn {
+            background-color: #000; /* Fond noir */
+            color: #fff; /* Texte blanc */
+            border: 2px solid #0080ff; /* Bordure bleu fluo */
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .save-btn:hover {
+            background-color: #0080ff; /* Fond bleu fluo au survol */
+            color: #000; /* Texte noir au survol */
+        }
+
+        .back-btn {
+            background-color: #000; /* Fond noir */
+            color: #fff; /* Texte blanc */
+            border: 1px solid #0080ff; /* Bordure bleue */
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background-color: #0080ff; /* Fond bleu au survol */
+            color: #000; /* Texte noir au survol */
+        }
+
+        .back-button-container {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .dashboard-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+    
+        .dashboard-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    
+        /* Style pour le menu déroulant */
+        .menu-item {
+            position: relative;
+        }
+    
+        .submenu-toggle {
+            margin-left: 5px;
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+    
+        .menu-item.expanded .submenu-toggle {
+            transform: rotate(180deg);
+        }
+    
+        .submenu {
+            display: none;
+            padding-left: 20px;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+    
+        .submenu.active {
+            display: block;
+            max-height: 500px; /* Hauteur maximale pour l'animation */
+        }
+    
+        .submenu-item {
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+        }
+    
+        .submenu-item:hover {
+            background-color: rgba(0, 128, 255, 0.1);
+            color: #fff;
+            border-left: 2px solid #0080ff;
+        }
+    
+        .submenu-item.active {
+            background-color: rgba(0, 128, 255, 0.2);
+            color: #fff;
+            border-left: 2px solid #0080ff;
+        }
+    
+        .submenu-item i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+    
+        /* Sections de contenu Facebook */
+        .facebook-section {
+            display: none;
+        }
+    
+        .facebook-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+    
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    
+        .show-more-btn {
+            background: transparent;
+            color: #0080ff;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 10px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-left: 5px;
+            transition: 0.2s;
+        }
+        .show-more-btn:hover {
+            background: #0066cc;
+        }
+
+        .choose-file-btn {
+            background-color: #0080ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .choose-file-btn:hover {
+            background-color: #0066cc;
+        }
+        .file-name {
+            margin-left: 10px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .popup-form {
+            background: #111 !important;   /* Fond noir */
+            color: #fff !important;        /* Texte blanc */
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            max-width: 400px;
+            margin-top: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .popup-form label,
+        .popup-form input,
+        .popup-form button,
+        .popup-form .form-buttons {
+            color: #fff !important;
+        }
+        .popup-form input[type="text"],
+        .popup-form input[type="url"] {
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+        }
+        .add-account-btn {
+            margin-bottom: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+    
+</head>
+
+
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="8" fill="#0080ff" />
+                    <circle cx="24" cy="12" r="8" fill="#666666" />
+                    <circle cx="12" cy="24" r="8" fill="#444444" />
+                    <circle cx="24" cy="24" r="8" fill="#888888" />
+                </svg>
+                <span class="logo-text">SentiSort</span>
+            </div>
+
+
+            <!-- Menu réseaux sociaux -->
+            <div class="menu-item" data-page="facebook">
+                <i class="fab fa-facebook"></i>
+                <span>Facebook</span>
+                <i class="fas fa-chevron-down submenu-toggle"></i>
+            </div>
+            <div class="submenu" id="facebook-submenu">
+                
+                <div class="submenu-item" data-section="facebook-add-post">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Post</span>
+                </div>
+                <div class="submenu-item" data-section="facebook-comments">
+                    <i class="fas fa-comments"></i>
+                    <span>Comment List</span>
+                </div>
+                <div class="submenu-item" data-section="facebook-posts">
+                    <i class="fas fa-list"></i>
+                    <span>Posts List </span>
+                </div>
+            </div>
+
+            <div class="menu-item" data-page="linkedin">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+                <i class="fas fa-chevron-down submenu-toggle"></i>
+            </div>
+            <div class="submenu" id="linkedin-submenu">
+                <div class="submenu-item" data-section="linkedin-add-post">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Post</span>
+                </div>
+                <div class="submenu-item" data-section="linkedin-comments">
+                    <i class="fas fa-comments"></i>
+                    <span>Comment List</span>
+                </div>
+                <div class="submenu-item" data-section="linkedin-posts">
+                    <i class="fas fa-list"></i>
+                    <span>Posts List </span>
+                </div>
+            </div>    
+
+            <div class="menu-item" data-page="twitter">
+                <img src="{% static 'icons/x-logo.png' %}" alt="X" style="width: 20px; height: 20px;">
+                <span>X</span>
+                <i class="fas fa-chevron-down submenu-toggle"></i>
+            </div>
+            <div class="submenu" id="twitter-submenu">
+                <div class="submenu-item" data-section="twitter-comments">
+                    <i class="fas fa-comments"></i>
+                    <span>Comment List</span>
+                </div>
+                <div class="submenu-item" data-section="twitter-posts">
+                    <i class="fas fa-list"></i>
+                    <span>Posts List </span>
+                </div>
+            </div>       
+
+            <div class="menu-item" data-page="youtube">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+                <i class="fas fa-chevron-down submenu-toggle"></i>
+            </div>
+            <div class="submenu" id="youtube-submenu">
+                <div class="submenu-item" data-section="youtube-comments">
+                    <i class="fas fa-comments"></i>
+                    <span>Comment List</span>
+                </div>
+                <div class="submenu-item" data-section="youtube-posts">
+                    <i class="fas fa-list"></i>
+                    <span>Posts List </span>
+                </div>
+            </div>
+
+            <div class="menu-item" id="employee-menu-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <a href="#employee" class="menu-text">Employee</a>
+            </div>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="logo">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="8" fill="#0080ff"/>
+                        <circle cx="24" cy="12" r="8" fill="#666666"/>
+                        <circle cx="12" cy="24" r="8" fill="#444444"/>
+                        <circle cx="24" cy="24" r="8" fill="#888888"/>
+                    </svg>
+                    <span class="logo-text">SentiSort</span>
+                </div>
+
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="global-search" placeholder="Search..." onkeyup="searchContent()">
+                </div>
+                <div class="user-dropdown">
+                    <div class="user-trigger">
+                        <!-- Remplacez ceci par votre image ou username -->
+                        <div class="photo-profile d-flex align-items-center">
+                            <img src="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'accounts/employee_image.jpg' %}{% endif %}" class="rounded-2"
+                                style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px; border-radius: 8px;">
+                            <div class="user-info">
+                                <span class="role">
+                                    {% if user.is_superuser %}
+                                    Admin
+                                    {% elif user.is_employee %}
+                                    Employé
+                                    {% else %}
+                                    Utilisateur
+                                    {% endif %}
+                                </span>
+                                <!-- <span class="username">{{ user.username }}</span>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-content">
+                        <a href="#me-content" class="dropdown-item">Profile</a>
+                        <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="profile-page" class="profile-page">
+                <div class="profile-container">
+                    <!-- Ajout du bouton Retour en haut de la page profil -->
+                    <div class="back-button-container" style="margin-bottom: 20px;">
+                       <button id="back-to-dashboard" class="back-btn">
+                           <i class="fas fa-arrow-left"></i> Retour
+                       </button>
+                    </div>
+                    <div class="profile-header">
+                        <div class="profile-pic-container">
+                            <img src="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'accounts/employee_image.jpg' %}{% endif %}" class="profile-pic" style="width: 100px; height: 100px; object-fit: cover;">
+                            <label for="file-input" class="change-pic-overlay">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            <form id="profile-image-form" method="POST" action="{% url 'update_profile_image' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="file" id="file-input" name="profile_image" accept="image/*" onchange="this.form.submit()">
+                            </form>
+                        </div>
+                        <div class="profile-info">
+                            <h2 class="profile-name">{{ admin.username }}</h2>
+                            <p class="profile-email">{{ admin.email }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-form">
+                        <form id="profile-form" method="POST" action="{% url 'update_profile' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="form-label">Nom complet</label>
+                                <input type="text" class="form-input" name="username" value="{{ user.username }}">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" name="email" value="{{ user.email }}">
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" class="save-btn">Enregistrer les modifications</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+
+           
+
+            <!-- Employees Section -->
+            <!-- SECTION EMPLOYES -->
+            <!-- SECTION EMPLOYES -->
+<div id="employees-content" class="dashboard-section" style="display: none;">
+    <div class="section-flex">
+        <!-- Employee List -->
+        <div class="employee-list" style="--border-bottom-width: 1px; --border-color: var(--token-5a0dcc2c-251d-4606-9870-db833a9857b3, rgb(25, 28, 31)); --border-left-width: 1px; --border-right-width: 1px; --border-style: solid; --border-top-width: 1px; background-color: var(--token-6cbf9c1e-888a-402b-be68-b54235b89ddb, rgb(1, 5, 9)); border-radius: 20px; box-shadow: rgba(45, 62, 80, 0.15) 0px 0px 40px 0px inset; width: 100%; opacity: 1;">
+            <div class="list-header">
+                <h2>Liste des employés</h2>
+                <div class="header-buttons">
+                    <button class="add-btn" id="showAddModal">
+                        <i class="fas fa-plus"></i>
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Date de début</th>
+                        <th>Adresse</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.user.username }}</td>
+                        <td>{{ employee.user.email }}</td>
+                        <td>{{ employee.start_date|date:"Y-m-d" }}</td>
+                        <td>{{ employee.address }}</td>
+                        <td>
+                            <button class="edit-btn" data-id="{{ employee.id }}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="delete-btn" data-id="{{ employee.id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" style="text-align: center;">Aucun employé enregistré</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AJOUT EMPLOYÉ -->
+<div id="addModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Ajouter un employé</h3>
+        <form id="employee-form" method="post" action="{% url 'add_employee' %}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="start_date">Date de début</label>
+                <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Adresse</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="modal-buttons">
+                <button type="submit" class="button-primary">Add</button>
+                <button type="button" class="button-secondary" id="closeAddModal">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<style>
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+</style>
+           <script>
+            
+    // Ouvrir le modal
+    document.getElementById("showAddModal").addEventListener("click", function () {
+        document.getElementById("addModal").style.display = "block";
+    });
+
+    // Fermer le modal via le bouton Annuler - CORRECTION ICI
+    document.getElementById("closeAddModal").addEventListener("click", function () {
+        document.getElementById("addModal").style.display = "none";
+    });
+
+    // Fermer en cliquant à l'extérieur
+    window.addEventListener("click", function (event) {
+        const modal = document.getElementById("addModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+</script>
+           
+<!-- Ajoutez cette section après la div id="facebook-content" -->
+<div id="facebook-add-post" class="dashboard-section">
+    <h1 class="section-title">Add Post</h1>
+    
+    <div class="form-container">
+        <form id="facebook-post-form" method="POST" action="/accounts/create-facebook-post/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="facebook_post">
+            <input type="hidden" name="active_tab" value="facebook">
+            
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" class="form-control" required style="background-color: black;"></textarea>
+
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image (optionnel)</label>
+                <input type="file" id="image-facebook" name="image" class="form-control" accept="image/*" style="display: none;">
+                <button type="button" class="choose-file-btn" onclick="document.getElementById('image-facebook').click();">
+                    <i class="fas fa-upload"></i> Choisir une image
+                </button>
+                <small style="color:#aaa; margin-right:10px;">L'image ne doit pas dépasser 300 Ko</small>
+                <span id="file-name-facebook" class="file-name"></span>
+                <div class="image-preview" id="image-preview"></div>
+            </div>
+            
+            <div class="form-buttons">
+                <button type="submit" class="button-primary">
+                    <i class="fas fa-paper-plane"></i> Publier 
+                </button>
+                <button type="button" class="button-secondary" id="cancelAdd">
+                     <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Social Networks Section -->
+<!-- Social Networks Section -->
+<div id="facebook-content" class="dashboard-section">
+    <h1 class="section-title">Analyse Facebook</h1>
+    <h2 class="section-title">Il va y'avoir ici les statistiques</h2>
+    
+</div>
+
+<!-- Section Comment List -->
+<div id="facebook-comments" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Facebook Comment</h1>
+    
+    <!-- Conteneur de boutons avec flexbox -->
+    <div class="button-container">
+        <!-- Bouton à gauche -->
+        <div class="button-left">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="facebook_data" value="1">
+                <input type="hidden" name="active_tab" value="facebook">
+                <button type="submit" class="social-btn">Récupérer les données</button>
+            </form>
+        </div>
+        
+        <!-- Bouton à droite -->
+        <div class="button-right">
+            <form method="POST" id="analyze-form" action="{% url 'admin_dashboard' %}" onsubmit="return handleAnalyzeSubmit(event)">
+                {% csrf_token %}
+                <input type="hidden" name="facebook_data" value="1">
+                <input type="hidden" name="action" value="analyze_facebook">
+                <button type="submit" class="social-btn">Analyser les commentaires</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Tableau initial des commentaires -->
+    <div id="initial-table-container" class="table-container {% if analyzed_data %}hidden{% endif %}">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Media</th> 
+                    <th>Commentaire</th>
+                    <th>Like du commentaire</th>
+                    <th>Like du post</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in facebook_data %}
+                <tr>
+                    <td>
+                        {% if item.media_url %}
+                            <img src="{{ item.media_url }}" width="180" alt="Media">
+                        {% else %}
+                            Aucun
+                        {% endif %}
+                    </td>
+                    
+                    <td>{{ item.comment_text }}</td>
+                    <td>{{ item.comment_likes }}</td>
+                    <td>{{ item.post_likes }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 20px;">Aucune donnée disponible</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+ <div id="loader-overlay">
+    <div class="loader-message  {% if analyzed_data %}hidden{% endif %}">
+        🕒 Analyse en cours... Veuillez patienter.
+    </div>
+ </div>
+
+
+    <!-- Tableau des résultats d'analyse -->
+    {% if analyzed_data %}
+    <div class="table-container" style="margin-top: 30px;">
+        <h2 class="section-title">Résultats de l'analyse</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Media</th>
+                    <th>Commentaire</th>
+                    <th>Likes Commentaire</th>
+                    <th>Language</th>
+                    <th>Sentiment</th>
+                    <th>Sentiment confidence</th>
+                    <th>Catégorie</th>
+                    <th>Categorie confidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in analyzed_data %}
+                <tr>
+                    <td>
+                        {% if result.media_url %}
+                            <img src="{{ result.media_url }}" width="180" alt="Media">
+                        {% else %}
+                            Aucun
+                        {% endif %}
+                    </td>
+                    <td>{{ result.comment_text }}</td>
+                    <td>{{ result.comment_likes }}</td>
+                    <td>{{ result.langue}}</td>
+                    <td>{{ result.sentiment.valeur }}</td>
+                    <td>{{ result.sentiment.confiance }}</td>
+                    <td>{{ result.categorie.valeur }}</td>
+                    <td>{{ result.categorie.confiance }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">Aucun résultat d’analyse</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+  </div>
+<!-- Styles CSS -->
+<style>
+.table-container.dimmed {
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+#loader {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+    margin: 20px 0;
+}
+.flex {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.social-btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.hidden {
+    display: none !important;
+}
+#loader-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.loader-message {
+    background: white;
+    padding: 20px 30px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    pointer-events: auto;
+}
+img {
+    vertical-align: middle;
+    max-width: 80%;
+    display: inline-block;
+}
+</style>
+<!-- Script JS -->
+<script>
+function handleAnalyzeSubmit(event) {
+    event.preventDefault();
+
+    // Rendre le tableau initial translucide
+    const initialTable = document.getElementById('initial-table-container');
+    if (initialTable) {
+        initialTable.classList.add('dimmed');
+    }
+
+const loaderOverlay = document.getElementById('loader-overlay');
+if (loaderOverlay) {
+    loaderOverlay.style.display = 'flex';
+}
+
+    // Soumettre le formulaire après un court délai pour voir l'effet
+    setTimeout(() => {
+        event.target.submit();
+    }, 100);
+}
+</script>
+<!-- Section Post List -->
+<div id="facebook-posts" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Liste des posts Facebook</h1>
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Media</th>
+                    <th>Like du post</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in facebook_data %}
+                <tr>
+                     <td>
+                        {% if item.media_url %}
+                            <img src="{{ item.media_url }}" width="60px">
+                        {% else %}
+                            Aucun
+                        {% endif %}
+                    </td>
+                    <td>{{ item.post_likes }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" style="text-align: center; padding: 20px;">Aucun post</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .form-buttons {
+        display: flex;
+        justify-content: center;
+        /* Centrer les boutons */
+        gap: 15px;
+        margin-top: 25px;
+        transition: all 0.3 ease;
+    }
+</style>
+
+<div id="linkedin-add-post" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Add Post</h1>
+    
+    <div class="form-container">
+        <form id="linkdin-post-form" method="POST" action="{% url 'create_linkedin_post' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="linkedin_post">
+            <input type="hidden" name="active_tab" value="linkedin">
+            
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" class="form-control" required style="background-color: black;"></textarea>
+
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image (optionnel)</label>
+                <input type="file" id="image-linkedin" name="image" class="form-control" accept="image/*" style="display: none;">
+                <button type="button" class="choose-file-btn" onclick="document.getElementById('image-linkedin').click();">
+                    <i class="fas fa-upload"></i> Choisir une image
+                </button>
+                <small style="color:#aaa; margin-right:10px;">L'image ne doit pas dépasser 300 Ko</small>
+                <span id="file-name-linkedin" class="file-name"></span>
+                <div class="image-preview" id="image-preview"></div>
+            </div>
+            
+            <div class="form-buttons">
+                <button type="submit" class="button-primary">
+                    <i class="fas fa-paper-plane"></i> Publier 
+                </button>
+                <button type="button" class="button-secondary" id="cancelAdd">
+                     <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="linkedin-content" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Analyse LinkedIn</h1>
+    <h2 class="section-title">Il y'aura des statistiques ici</h2>
+    
+            
+</div>
+<div id="linkedin-add-post" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Add Post </h1>
+    
+    <div class="form-container">
+        <form id="linkedin-post-form" method="POST" action="{% url 'create_linkedin_post' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="linkedin_post">
+            
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" class="form-control" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="link">Lien (optionnel)</label>
+                <input type="url" id="link" name="link" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="image">Image (optionnel)</label><small style="color:#aaa; margin-right:10px;">L'image ne doit pas dépasser 300 Ko</small>
+                <input type="file" id="image-linkedin" name="image" class="form-control" accept="image/*">
+                <div class="image-preview" id="image-preview"></div>
+                <button type="button" class="choose-file-btn" onclick="document.getElementById('image-linkedin').click();">
+                    <i class="fas fa-upload"></i> Choisir une image
+                </button>
+                <small style="color:#aaa; margin-right:10px;">L'image ne doit pas dépasser 300 Ko</small>
+                <span id="file-name-linkedin" class="file-name"></span>
+            </div>
+            
+            <div class="form-buttons">
+                <button type="submit" class="button-primary">
+                    <i class="fas fa-paper-plane"></i> Publier
+                </button>
+                <button type="reset" class="button-secondary" id="cancelAdd">
+                    <i class="fas fa-times"> </i> Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+<div id="linkedin-comments" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Liste des commentaires LinkedIn</h1>
+    <div class="button-container">
+        <form method="POST" action="{% url 'etape1_linkedin' %}">
+            {% csrf_token %}
+            <input type="hidden" name="active_tab" value="linkedin">
+            <button type="submit" class="social-btn">Récupérer les données</button>
+        </form>
+    
+        <form method="POST" action="{% url 'etape2_linkedin' %}">
+            {% csrf_token %}
+            <input type="hidden" name="active_tab" value="linkedin">
+            <button type="submit" class="social-btn">Extraire les données</button>
+        </form>
+    </div>
+    <style>
+        .button-container {
+            display: flex; /* Aligne les éléments en ligne */
+            gap: 15px; /* Ajoute un espace de 15px entre les boutons */
+            justify-content: flex-start; /* Aligne les boutons à gauche */
+            margin-bottom: 20px; /* Ajoute un espace en bas du conteneur */
+        }
+
+        .button-container form {
+            margin: 0; /* Supprime les marges par défaut des formulaires */
+        }
+    </style>
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Commentaires</th>
+                </tr>
+                        <tbody>
+                {% for post in linkedin_data %}
+                    {% for comment in post.comments_set.all %}
+                    <tr>
+                        <td>
+                            <strong>{{ comment.nom }}</strong> : 
+                            <span class="short-content">
+                                {{ comment.texte|slice:":20" }}{% if comment.texte|length > 20 %}...{% endif %}
+                            </span>
+                            {% if comment.texte|length > 20 %}
+                                <span class="full-content" style="display:none;">{{ comment.texte }}</span>
+                                <button type="button" class="show-more-btn" onclick="toggleContent(this)">plus</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>Aucun commentaire</td>
+                    </tr>
+                    {% endfor %}
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 20px;">Aucune donnée disponible</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div id="linkedin-posts" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Liste des posts LinkedIn</h1>
+    <div class="button-container">
+        
+    
+        
+    </div>
+    <style>
+        .button-container {
+            display: flex; /* Aligne les éléments en ligne */
+            gap: 15px; /* Ajoute un espace de 15px entre les boutons */
+            justify-content: flex-start; /* Aligne les boutons à gauche */
+            margin-bottom: 20px; /* Ajoute un espace en bas du conteneur */
+        }
+
+        .button-container form {
+            margin: 0; /* Supprime les marges par défaut des formulaires */
+        }
+    </style>
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Contenu</th>
+                    <th>J'aime</th>
+                    <th>Repostes</th>
+                </tr>
+                <tbody>
+                {% for post in linkedin_data %}
+                <tr>
+                    <td>
+                        <span class="short-content">
+                            {{ post.contenue|slice:":20" }}{% if post.contenue|length > 20 %}...{% endif %}
+                        </span>
+                        {% if post.contenue|length > 20 %}
+                            <span class="full-content" style="display:none;">{{ post.contenue }}</span>
+                            <button type="button" class="show-more-btn" onclick="toggleContent(this)">plus</button>
+                        {% endif %}
+                    </td>
+                    <td>{{ post.nombre_jaime }}</td>
+                    <td>{{ post.nombre_republication }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 20px;">Aucune donnée disponible</td>
+                </tr>
+                {% endfor %}
+           </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div id="twitter-content" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Analyse X</h1>
+    <h2 class="section-title">Il y'aura des statistiques ici</h2>
+</div>
+<div id="twitter-comments" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Liste des tweet</h1>
+    
+    <div class="button-container">
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Contenu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in twitter_data %}
+                    <tr>
+                        <td>{{ item.text }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="1" style="text-align: center; padding: 20px;">Aucune donnée disponible</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="twitter-posts" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Liste des tweets</h1>
+    <div class="button-container">
+        <!-- Bouton pour ouvrir le modal Twitter -->
+        <button type="button" class="social-btn" id="showTwitterModalBtn">
+            <i class="fas fa-plus"></i> Ajouter un compte Twitter
+        </button>
+
+        <!-- Modal pour ajouter un compte Twitter -->
+        <div id="twitterModal" class="modal" style="display: none ; ">
+            <div class="modal-content" style="background-color: #0b0b0b; color: white; text-align: center;">
+                
+                <h2>Ajouter un compte Twitter</h2>
+                <form method="POST" action="{% url 'add_social_account' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="platform" value="twitter">
+                    <input type="hidden" name="active_tab" value="twitter">
+                    
+                    <div class="form-group">
+                        
+                        <input type="text" id="twitter_account_name" name="account_name" class="form-control" required placeholder="@NomDuCompte">
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="button-primary">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                        <button type="button" class="button-secondary" id="closeTwitterModalBtn">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bouton pour récupérer les données -->
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="twitter_data" value="1">
+            <input type="hidden" name="active_tab" value="twitter">
+            <button type="submit" class="social-btn">Récupérer les données</button>
+        </form>
+    </div>
+    
+    <!-- Tableau des tweets -->
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Contenu</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in twitter_data %}
+                <tr>
+                    <td>{{ item.text }}</td>
+                    <td>{{ item.created_at }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" style="text-align: center; padding: 20px;">Aucune donnée disponible</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="youtube-content" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Analyse YouTube</h1>
+    <h2 class="section-title">Il y'aura des statistiques ici</h2>
+</div>
+<div id="youtube-comments" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Liste des commentaires Youtube</h1>
+    
+    <div class="button-container">
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Commentaires</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in youtube_data %}
+                    <tr>
+                        <td>{{ item.comment_text }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="1" style="text-align: center; padding: 20px;">Aucune donnée disponible</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+  </div>
+</div>  
+<div id="youtube-posts" class="dashboard-section" style="display: none;">
+    <h1 class="section-title">Liste des post YouTube</h1>
+    <div class="button-container">
+        <!-- Bouton pour ouvrir le modal YouTube -->
+        <button type="button" class="social-btn" id="showYoutubeModalBtn">
+            <i class="fas fa-plus"></i> Ajouter une chaîne YouTube
+        </button>
+
+        <!-- Modal pour ajouter une chaîne YouTube -->
+        <div id="youtubeModal" class="modal" style="display: none;">
+            
+             <div class="modal-content" style="background-color: #0b0b0b; color: white; text-align: center;">
+                
+               <h2>Ajouter un compte Twitter</h2>
+                <form method="POST" action="{% url 'add_social_account' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="platform" value="youtube">
+                    <input type="hidden" name="active_tab" value="youtube">
+                    
+                    <div class="form-group">
+                        
+                        <input type="text" id="youtube_account_name" name="account_name" class="form-control" required placeholder="ex: UCtBzf...">
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="button-primary">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                        <button type="button" class="button-secondary" id="closeYoutubeModalBtn">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bouton pour récupérer les données -->
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="youtube_data" value="1">
+            <input type="hidden" name="active_tab" value="youtube">
+            <button type="submit" class="social-btn">Récupérer les données</button>
+        </form>
+    </div>
+    
+    <!-- Tableau des posts YouTube -->
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Vues</th>
+                    <th>J'aime</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in youtube_data %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.views }}</td>
+                    <td>{{ item.likes_video }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 20px;">Aucune donnée disponible</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+        /* Aligner à droite le contenu des tables Twitter et YouTube */
+    #twitter-comments .data-table td,
+    #twitter-posts .data-table td,
+    #youtube-comments .data-table td,
+    #youtube-posts .data-table td {
+        text-align: left;
+    }
+    #twitter-comments .data-table th,
+    #twitter-posts .data-table th,
+    #youtube-comments .data-table th,
+    #youtube-posts .data-table th {
+        text-align: left;
+    }
+</style>   
+<style>
+    /* Style for social network sections */
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+    
+    .button-container {
+        margin-bottom: 20px;
+        text-align: right;
+    }
+    
+    .social-btn {
+        background-color: #0080ff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .social-btn:hover {
+        background-color: #0066cc;
+    }
+    
+    .table-container {
+        background-color: rgba(20, 25, 35, 0.7);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-left: auto;   /* Centrage horizontal */
+        margin-right: auto;  /* Centrage horizontal */
+        width: 95%;
+    }
+    
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .data-table th {
+        background-color: rgba(30, 35, 45, 0.8);
+        color: #0080ff;
+        text-align: left;
+        padding: 15px;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .data-table td {
+        padding: 15px;
+        color: #fff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        max-width: 200px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .data-table tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Make sure we display Facebook content by default */
+    #facebook-content {
+        display: block;
+    }
+</style>
+
+    <script>
+
+        // Menu items functionality
+        const menuItems = document.querySelectorAll('.menu-item');
+        const dashboardSections = document.querySelectorAll('.dashboard-section');
+
+        // Function to hide all sections
+        function hideAllSections() {
+            dashboardSections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Remove active class from all menu items
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+
+        // Statistics menu item
+
+
+        // Employee menu item
+        document.getElementById('employee-menu-item').addEventListener('click', () => {
+            hideAllSections();
+            document.getElementById('employees-content').style.display = 'block';
+            document.getElementById('employee-menu-item').classList.add('active');
+        });
+
+        // Social media menu item
+         
+
+        // Profile menu item
+        document.getElementById('profile-menu-item').addEventListener('click', () => {
+            hideAllSections();
+            document.getElementById('me-content').style.display = 'block';
+            document.getElementById('profile-menu-item').classList.add('active');
+        });
+
+        // Show welcome content by default
+        document.getElementById('welcome-content').style.display = 'block';
+
+
+
+        function toggleDropdown() {
+            const dropdown = document.querySelector('.dropdown-menu');
+            dropdown.classList.toggle('show');
+        }
+
+        // Fermer le dropdown quand on clique en dehors
+        document.addEventListener('click', function (event) {
+            const dropdown = document.querySelector('.dropdown-menu');
+            const photoProfile = document.querySelector('.photo-profile');
+
+            if (!photoProfile.contains(event.target) && dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+
+    </script>
+    
+
+  
+    <!-- Modal de confirmation de suppression -->
+    <div id="deleteModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Confirmer la suppression</h3>
+            <p>Êtes-vous sûr de vouloir supprimer cet employé ?</p>
+            <div class="modal-buttons">
+                <button id="confirmDelete" class="button-primary">Confirm</button>
+                <button id="cancelDelete" class="button-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal d'édition -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Modifier l'employé</h3>
+            <form id="editForm" method="POST">
+                {% csrf_token %}
+               
+                <div class="form-group">
+                    <label for="edit_username">Username</label>
+                    <input type="text" id="edit_username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_email">Email</label>
+                    <input type="email" id="edit_email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_start_date">Date de début</label>
+                    <input type="date" id="edit_start_date" name="start_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_address">Adresse</label>
+                    <input type="text" id="edit_address" name="address" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="button-primary">Sauvegarder</button>
+                    <button type="button" class="button-secondary" id="cancelEdit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteModal = document.getElementById('deleteModal');
+            const editModal = document.getElementById('editModal');
+            let currentEmployeeId = null;
+
+            // Gestionnaire pour le bouton d'édition
+            document.querySelectorAll('.edit-btn').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const employeeId = button.getAttribute('data-id');
+                    currentEmployeeId = employeeId;
+
+                    try {
+                        const response = await fetch(`/accounts/admin/employees/get/${employeeId}/`);
+                        if (!response.ok) throw new Error('Erreur lors de la récupération des données');
+                        
+                        const employee = await response.json();
+                        console.log('Données employé récupérées:', employee); // Debug
+
+                        // Remplir le formulaire avec les données de l'employé
+                        document.getElementById('edit_username').value = employee.username;
+                        document.getElementById('edit_email').value = employee.email;
+                        document.getElementById('edit_start_date').value = employee.start_date;
+                        document.getElementById('edit_address').value = employee.address;
+
+                        // Afficher le modal
+                        editModal.style.display = 'block';
+                    } catch (error) {
+                        console.error('Erreur:', error);
+                        alert('Erreur lors de la récupération des données de l\'employé');
+                    }
+                });
+            });
+
+            // Gestionnaire pour le bouton de suppression
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentEmployeeId = button.getAttribute('data-id');
+                    deleteModal.style.display = 'block';
+                });
+            });
+
+            // Confirmation de suppression
+            document.getElementById('confirmDelete').addEventListener('click', async () => {
+                try {
+                    const response = await fetch(`/accounts/admin/employees/delete/${currentEmployeeId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        }
+                    });
+
+                    if (response.ok) {
+                        window.location.reload();
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                }
+            });
+
+            // Annulation de la suppression - CORRECTION ICI
+            document.getElementById('cancelDelete').addEventListener('click', () => {
+                deleteModal.style.display = 'none';
+            });
+
+            // Fermer le modal via le bouton Annuler
+            document.getElementById("cancelAdd").addEventListener("click", function () {
+                document.getElementById("addModal").style.display = "none";
+            });
+
+            // Gestion du formulaire d'édition
+            document.getElementById('editForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                
+                // Debug: afficher les données envoyées
+                for (let pair of formData.entries()) {
+                    console.log(pair[0] + ': ' + pair[1]);
+                }
+
+                try {
+                    const response = await fetch(`/accounts/admin/employees/edit/${currentEmployeeId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        },
+                        body: formData
+                    });
+
+                    const data = await response.json();
+                    console.log('Réponse du serveur:', data); // Debug
+
+                    if (response.ok) {
+                        // Fermer le modal
+                        document.getElementById('editModal').style.display = 'none';
+                        
+                        // Recharger la page pour afficher les modifications
+                        window.location.reload();
+                    } else {
+                        alert(data.error || 'Une erreur est survenue lors de la modification');
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de la modification de l\'employé');
+                }
+            });
+
+            // Annulation de l'édition
+            document.getElementById('cancelEdit').addEventListener('click', () => {
+                editModal.style.display = 'none';
+            });
+
+            // Fermer les modals si on clique en dehors du modal
+            window.addEventListener('click', (e) => {
+                if (e.target === deleteModal) {
+                    deleteModal.style.display = 'none';
+                }
+                if (e.target === editModal) {
+                    editModal.style.display = 'none';
+                }
+            });
+        });
+    
+    
+        // Initialisation des variables pour le modal et l'overlay
+        const addModal = document.getElementById("addModal");
+        const cancelAdd = document.getElementById("cancelAdd");
+        const modalBox = document.getElementById("modalBox");
+
+        const showAddBtn = document.getElementById("showAddModal");
+
+        // Ouvrir le modal
+        showAddBtn.addEventListener("click", () => {
+            addModal.classList.remove("hidden");
+        });
+
+        // Fermer le modal avec le bouton Annuler
+        cancelAdd.addEventListener("click", () => {
+            addModal.classList.add("hidden");
+        });
+
+        // Fermer le modal si on clique en dehors
+        addModal.addEventListener("click", (e) => {
+            if (e.target.classList.contains("custom-modal-overlay")) {
+                addModal.classList.add("hidden");
+            }
+        });
+
+        // Variables pour le drag
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        // Fonction de démarrage du drag
+        modalBox.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - modalBox.offsetLeft;
+            offsetY = e.clientY - modalBox.offsetTop;
+            modalBox.style.cursor = "grabbing"; // Change le curseur lors du drag
+        });
+
+        // Fonction de déplacement
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                modalBox.style.left = `${x}px`;
+                modalBox.style.top = `${y}px`;
+            }
+        });
+
+        // Fonction pour arrêter le drag
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            modalBox.style.cursor = "move"; // Rétablir le curseur normal
+        });
+   
+        document.getElementById('employee-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+
+            try {
+                const response = await fetch('/accounts/admin/employees/add/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.status === 'success') {
+                    // Fermer le modal
+                    document.getElementById('addModal').style.display = 'none';
+                    // Réinitialiser le formulaire
+                    e.target.reset();
+                    
+                    // Ajouter le nouvel employé à la table sans recharger la page
+                    const employeeTable = document.querySelector('#employees-content table tbody');
+                    const newRow = document.createElement('tr');
+                    
+                    // Créer les cellules avec les données du nouvel employé
+                    newRow.innerHTML = `
+                        <td>${formData.get('username')}</td>
+                        <td>${formData.get('email')}</td>
+                        <td>${formData.get('start_date')}</td>
+                        <td>${formData.get('address')}</td>
+                        <td>
+                            <button class="edit-btn" data-id="${data.employee_id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="delete-btn" data-id="${data.employee_id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    
+                    // Ajouter la nouvelle ligne au tableau
+                    employeeTable.appendChild(newRow);
+                    
+                    // Ajouter les écouteurs d'événements pour les nouveaux boutons
+                    const editBtn = newRow.querySelector('.edit-btn');
+                    const deleteBtn = newRow.querySelector('.delete-btn');
+                    
+                    // Écouteur pour le bouton d'édition
+                    editBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const employeeId = editBtn.getAttribute('data-id');
+                        currentEmployeeId = employeeId;
+
+                        try {
+                            const response = await fetch(`/accounts/admin/employees/get/${employeeId}/`);
+                            if (!response.ok) throw new Error('Erreur lors de la récupération des données');
+                            
+                            const employee = await response.json();
+                            
+                            // Remplir le formulaire avec les données de l'employé
+                            document.getElementById('edit_username').value = employee.username;
+                            document.getElementById('edit_email').value = employee.email;
+                            document.getElementById('edit_start_date').value = employee.start_date;
+                            document.getElementById('edit_address').value = employee.address;
+
+                            // Afficher le modal
+                            document.getElementById('editModal').style.display = 'block';
+                        } catch (error) {
+                            console.error('Erreur:', error);
+                        }
+                    });
+                    
+                    // Écouteur pour le bouton de suppression
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentEmployeeId = deleteBtn.getAttribute('data-id');
+                        document.getElementById('deleteModal').style.display = 'block';
+                    });
+                    
+                    // Vérifier s'il y a un message "Aucun employé enregistré" et le supprimer
+                    const emptyRow = employeeTable.querySelector('tr td[colspan="6"]');
+                    if (emptyRow) {
+                        emptyRow.parentNode.remove();
+                    }
+                    
+                    // Afficher un pop-up de succès avec SweetAlert2
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Succès!',
+                        text: `L'employé ${formData.get('username')} a été ajouté avec succès.`,
+                        showConfirmButton: true,
+                        timer: 3000,
+                        customClass: {
+                            popup: 'dark-swal'
+                        }
+                    });
+                } else {
+                    // Afficher un pop-up d'erreur avec SweetAlert2
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: data.error || 'Une erreur est survenue lors de l\'ajout de l\'employé',
+                        customClass: {
+                            popup: 'dark-swal'
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                // Afficher un pop-up d'erreur avec SweetAlert2
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: 'Erreur lors de la communication avec le serveur',
+                    customClass: {
+                        popup: 'dark-swal'
+                    }
+                });
+            }
+        });
+
+       document.querySelector('.dropdown-item[href="#me-content"]').addEventListener('click', (e) => {
+          e.preventDefault();
+          hideAllSections(); // Utilisez la fonction existante pour cacher les sections
+          document.getElementById('profile-page').style.display = 'block';
+        });
+    </script>
+    
+
+
+
+    <style>
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            /* Animation d'apparition */
+            animation: modalAppear 0.3s ease-out;
+            /* Centrage supplémentaire */
+            margin: auto;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Animation pour l'apparition du modal */
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-60%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(-50%);
+            }
+        }
+
+        .modal-content p {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+
+        }
+
+        .form-group input {
+            background-color: black;
+        }
+        .form-container{
+        background-color: rgba(20, 25, 35, 0.7);
+    
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            /* Centrer les boutons */
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .button-primary {
+            min-width: 120px;
+            /* Largeur minimale pour les boutons */
+            padding: 10px 10px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background-color: black;
+
+        }
+
+        .button-secondary {
+            min-width: 120px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            border: none;
+            background-color: #f44336 !important;
+            /* Rouge */
+            color: white !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Style des inputs */
+        .form-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .form-group input {
+            background-color: #2c3a4a;
+            border: 1px solid #3a4a5e;
+            color: #ffffff;
+        }
+
+        .light-mode .form-group input {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            color: #333333;
+        }
+
+        /* Hover effects */
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 128, 255, 0.2);
+        }
+
+        .button-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgb(255, 0, 0);
+        }
+
+        .list-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #0080ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background-color: #0066cc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 128, 255, 0.2);
+        }
+
+        .add-btn i {
+            font-size: 12px;
+        }
+
+        /* Animation pour le bouton refresh lors du clic */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .refresh-btn.spinning i {
+            animation: spin 1s linear;
+        }
+
+        /* Modal container */
+        .custom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal content */
+        .custom-modal-box {
+            position: relative;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: modalAppear 0.3s ease-out;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: move;
+            /* Pour montrer qu'on peut déplacer le modal */
+        }
+
+        .custom-modal-box h3 {
+            cursor: move;
+            /* Pour montrer qu'on peut déplacer depuis le titre */
+        }
+
+        /* Animation pour l'apparition du modal */
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-60%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(-50%);
+            }
+        }
+        /* Style pour les lignes mises en évidence lors de la recherche */
+            tr.highlight {
+                background-color: rgba(0, 128, 255, 0.2) !important;
+                transition: background-color 0.3s ease;
+            }
+            
+            /* Style pour la barre de recherche */
+            .search-bar {
+                position: relative;
+                display: flex;
+                align-items: center;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                padding: 8px 15px;
+                width: 450px;
+            }
+            
+            .search-bar input {
+                background: transparent;
+                border: none;
+                color: #fff;
+                width: 100%;
+                margin-left: 10px;
+                outline: none;
+            }
+            
+            .search-bar i {
+                color: rgba(255, 255, 255, 0.6);
+            }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const refreshBtn = document.querySelector('.refresh-btn');
+
+            refreshBtn.addEventListener('click', function () {
+                // Ajouter la classe pour l'animation
+                this.classList.add('spinning');
+
+                // Recharger la page
+                window.location.reload();
+            });
+        });
+    </script>
+    <!-- Updated JavaScript to toggle between sections -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fonction pour masquer toutes les sections
+        function hideAllSections() {
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.style.display = 'none';
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+        
+        // Gestionnaires d'événements pour les éléments du menu
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const page = this.getAttribute('data-page');
+                
+                // Masquer toutes les sections
+                hideAllSections();
+                
+                // Afficher la section sélectionnée avec animation
+                const selectedSection = document.getElementById(`${page}-content`);
+                if (selectedSection) {
+                    // Utiliser setTimeout pour permettre à l'animation de se déclencher
+                    setTimeout(() => {
+                        selectedSection.style.display = 'block';
+                        // Forcer un reflow pour que la transition fonctionne
+                        void selectedSection.offsetWidth;
+                        selectedSection.classList.add('active');
+                    }, 10);
+                }
+                
+                // Activer l'élément de menu
+                this.classList.add('active');
+                
+                // Mettre à jour l'URL avec le nouvel onglet actif
+                const url = new URL(window.location.href);
+                url.searchParams.set('active_tab', page);
+                window.history.pushState({}, '', url);
+            });
+        });
+        
+        // Gestion spéciale pour l'onglet des employés
+        document.getElementById('employee-menu-item').addEventListener('click', function() {
+            hideAllSections();
+            
+            // Afficher la section des employés avec animation
+            const employeesSection = document.getElementById('employees-content');
+            setTimeout(() => {
+                employeesSection.style.display = 'block';
+                void employeesSection.offsetWidth;
+                employeesSection.classList.add('active');
+            }, 10);
+            
+            // Activer l'élément de menu
+            this.classList.add('active');
+            
+            // Mettre à jour l'URL
+            const url = new URL(window.location.href);
+            url.searchParams.set('active_tab', 'employee');
+            window.history.pushState({}, '', url);
+        });
+        
+        // Activer l'onglet initial en fonction du paramètre dans l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get('active_tab') || '{{ active_tab }}' || 'facebook';
+        
+        // Masquer toutes les sections
+        hideAllSections();
+        
+        // Afficher la section active avec animation
+        if (activeTab === 'employee') {
+            const employeesSection = document.getElementById('employees-content');
+            setTimeout(() => {
+                employeesSection.style.display = 'block';
+                void employeesSection.offsetWidth;
+                employeesSection.classList.add('active');
+            }, 10);
+            document.getElementById('employee-menu-item').classList.add('active');
+        } else {
+            const activeSection = document.getElementById(`${activeTab}-content`);
+            if (activeSection) {
+                setTimeout(() => {
+                    activeSection.style.display = 'block';
+                    void activeSection.offsetWidth;
+                    activeSection.classList.add('active');
+                }, 10);
+            }
+            
+            const activeMenuItem = document.querySelector(`.menu-item[data-page="${activeTab}"]`);
+            if (activeMenuItem) {
+                activeMenuItem.classList.add('active');
+            }
+        }
+    });
+</script>
+      <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6735ec32acab9d477bc254a6"
+      type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+  <script src="https://cdn.prod.website-files.com/6735ec32acab9d477bc254a6/js/webflow.schunk.c738037d7abc829e.js"
+      type="text/javascript"></script>
+  <script src="https://cdn.prod.website-files.com/6735ec32acab9d477bc254a6/js/webflow.schunk.6f8bebc185dfbea4.js"
+      type="text/javascript"></script>
+  <script src="https://cdn.prod.website-files.com/6735ec32acab9d477bc254a6/js/webflow.6bb3ff14.59c5c2bd42ca13f1.js"
+      type="text/javascript"></script>
+
+      <script>
+        // Gestion du profil
+        const profilePage = document.getElementById('profile-page');
+        document.querySelector('.dropdown-item[href="#me-content"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            hideAllPages();
+            profilePage.style.display = 'block';
+        });
+
+        // Ajoutez cette fonction si elle n'existe pas déjà
+        function hideAllPages() {
+          // Cachez la page de profil
+          document.getElementById('profile-page').style.display = 'none';
+    
+         // Utilisez hideAllSections pour cacher les autres sections
+         hideAllSections();
+        }
+
+        // Ajoutez ce code à votre section script existante
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gestionnaire pour le bouton retour
+            document.getElementById('back-to-dashboard').addEventListener('click', function() {
+                // Cacher la page de profil
+                document.getElementById('profile-page').style.display = 'none';
+        
+                // Afficher la section Facebook par défaut (ou celle qui était active avant)
+                document.getElementById('facebook-content').style.display = 'block';
+                document.querySelector('.menu-item[data-page="facebook"]').classList.add('active');
+            });
+        });
+   
+
+        // Ajoutez ce code à votre section script existante
+        document.addEventListener('DOMContentLoaded', function() {
+            // Référence au formulaire d'upload d'image
+            const profileImageForm = document.getElementById('profile-image-form');
+            const fileInput = document.getElementById('file-input');
+            
+            if (fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            // Mettre à jour l'image du profil
+                            const profilePic = document.querySelector('.profile-pic');
+                            if (profilePic) {
+                                profilePic.src = e.target.result;
+                            }
+                            
+                            // Mettre à jour l'image de l'en-tête
+                            const headerPic = document.querySelector('.photo-profile img');
+                            if (headerPic) {
+                                headerPic.src = e.target.result;
+                            }
+                            
+                            // Soumettre le formulaire pour sauvegarder l'image
+                            profileImageForm.submit();
+                        };
+                        
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fonction pour masquer toutes les sections
+            function hideAllSections() {
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.style.display = 'none';
+                    section.classList.remove('active');
+                });
+                document.querySelectorAll('.menu-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.classList.remove('expanded');
+                });
+                document.querySelectorAll('.submenu').forEach(sub => sub.classList.remove('active'));
+                document.querySelectorAll('.submenu-item').forEach(subitem => subitem.classList.remove('active'));
+            }
+    
+            // Gestion du clic sur chaque menu principal (Facebook, LinkedIn, etc.)
+            document.querySelectorAll('.menu-item[data-page]').forEach(menuItem => {
+                const page = menuItem.getAttribute('data-page');
+                const submenu = document.getElementById(page + '-submenu');
+                const chevron = menuItem.querySelector('.submenu-toggle');
+                menuItem.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Fermer tous les autres sous-menus
+                    document.querySelectorAll('.submenu').forEach(sm => sm.classList.remove('active'));
+                    document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('expanded'));
+                    // Ouvrir/fermer celui-ci
+                    if (submenu) {
+                        submenu.classList.toggle('active');
+                        menuItem.classList.toggle('expanded');
+                    } else {
+                        // Si pas de sous-menu, afficher la section principale
+                        hideAllSections();
+                        const section = document.getElementById(page + '-content');
+                        if (section) {
+                            section.style.display = 'block';
+                            void section.offsetWidth;
+                            section.classList.add('active');
+                        }
+                        menuItem.classList.add('active');
+                    }
+                });
+            });
+    
+            // Gestion du clic sur chaque bouton du sous-menu
+            document.querySelectorAll('.submenu-item').forEach(submenuItem => {
+                submenuItem.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    hideAllSections();
+                    // Afficher la section liée à ce bouton
+                    const sectionId = this.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.style.display = 'block';
+                        void section.offsetWidth;
+                        section.classList.add('active');
+                    }
+                    // Activer le menu principal parent
+                    const parentMenu = this.closest('.submenu').previousElementSibling;
+                    if (parentMenu && parentMenu.classList.contains('menu-item')) {
+                        parentMenu.classList.add('active');
+                        parentMenu.classList.add('expanded');
+                        this.closest('.submenu').classList.add('active');
+                    }
+                    // Activer le bouton du sous-menu
+                    this.classList.add('active');
+                });
+            });
+    
+            // Fermer les sous-menus si on clique ailleurs
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.submenu').forEach(sm => sm.classList.remove('active'));
+                document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('expanded'));
+            });
+        });
+ </script> 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Fonction pour masquer toutes les sections
+        function hideAllSections() {
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.style.display = 'none';
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+    
+        // Gestion des clics sur les éléments du sous-menu Facebook
+        document.querySelectorAll('.submenu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+    
+                // Masquer toutes les sections
+                hideAllSections();
+    
+                // Afficher UNIQUEMENT la section demandée
+                const sectionId = this.getAttribute('data-section');
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.style.display = 'block';
+                    void section.offsetWidth;
+                    section.classList.add('active');
+                }
+    
+                // Activer le menu Facebook
+                document.querySelector('.menu-item[data-page="facebook"]').classList.add('active');
+    
+                // Activer l'élément du sous-menu
+                document.querySelectorAll('.submenu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    });
+    </script>
+   
+   
+    <script>
+        // Définir les indices de colonnes pour chaque tableau
+        window.tableColumnIndices = {
+            'facebook-content': 1,  // Colonne "Commentaire" dans le tableau Facebook
+            'youtube-content': 4,   // Colonne "Commentaires" dans le tableau YouTube
+            'twitter-content': 1,   // Colonne "Contenu" dans le tableau Twitter
+            'linkedin-content': 1,  // Colonne "Contenu" dans le tableau LinkedIn
+            'employees-content': 0  // Colonne "Username" dans le tableau des employés
+        };
+
+        function searchContent() {
+            const searchText = document.getElementById('global-search').value.toLowerCase();
+            
+            // Déterminer quelle section est actuellement visible
+            let activeSection = null;
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                if (section.style.display !== 'none') {
+                    activeSection = section.id;
+                }
+            });
+            
+            // Si aucune section n'est active ou si le texte de recherche est vide, ne rien faire
+            if (!activeSection) {
+                return;
+            }
+            
+            // Réinitialiser tous les tableaux si le texte de recherche est vide
+            if (searchText === '') {
+                resetAllTables();
+                return;
+            }
+            
+            // Effectuer la recherche en fonction de la section active
+            if (window.tableColumnIndices[activeSection] !== undefined) {
+                searchTable(activeSection);
+            }
+        }
+        
+        function searchTable(sectionId, columnIndexOverride) {
+            const columnIndex = columnIndexOverride || window.tableColumnIndices[sectionId];
+            const searchText = document.getElementById('global-search').value.toLowerCase();
+            
+            // Sélectionner la table appropriée
+            let table;
+            if (sectionId === 'employees-content') {
+                table = document.querySelector(`#${sectionId} table`);
+            } else {
+                table = document.querySelector(`#${sectionId} .data-table`);
+            }
+            
+            if (!table) return;
+            
+            const rows = table.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const cell = row.cells[columnIndex];
+                if (!cell) return;
+                
+                const content = cell.textContent.toLowerCase();
+                
+                if (content.includes(searchText)) {
+                    row.style.display = '';
+                    row.classList.add('highlight');
+                } else {
+                    row.style.display = 'none';
+                    row.classList.remove('highlight');
+                }
+            });
+        }
+        
+        function resetAllTables() {
+            // Réinitialiser toutes les tables, y compris celle des employés
+            document.querySelectorAll('table tbody tr').forEach(row => {
+                row.style.display = '';
+                row.classList.remove('highlight');
+            });
+        }
+    </script>
+    <script>
+        // Initialiser la recherche lorsque la page est chargée
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ajouter un événement pour réinitialiser la recherche lors du changement de section
+            document.querySelectorAll('.menu-item, .submenu-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // Vider le champ de recherche
+                    document.getElementById('global-search').value = '';
+                    // Réinitialiser tous les tableaux
+                    resetAllTables();
+                });
+            });
+            
+            // Définir les indices de colonnes pour chaque tableau
+            window.tableColumnIndices = {
+                'facebook-content': 1,  // Colonne "Commentaire" dans le tableau Facebook
+                'youtube-content': 4,   // Colonne "Commentaires" dans le tableau YouTube
+                'twitter-content': 1,   // Colonne "Contenu" dans le tableau Twitter
+                'linkedin-content': 1,  // Colonne "Contenu" dans le tableau LinkedIn
+                'employees-content': 0  // Colonne "Username" dans le tableau des employés
+            };
+            
+            // Mettre à jour la fonction searchTable pour utiliser ces indices
+            window.searchTable = function(sectionId, columnIndexOverride) {
+                const columnIndex = columnIndexOverride || window.tableColumnIndices[sectionId];
+                const searchText = document.getElementById('global-search').value.toLowerCase();
+                
+                const table = document.querySelector(`#${sectionId} .data-table`);
+                if (!table) return;
+                
+                const rows = table.querySelectorAll('tbody tr');
+                
+                rows.forEach(row => {
+                    const cell = row.cells[columnIndex];
+                    if (!cell) return;
+                    
+                    const content = cell.textContent.toLowerCase();
+                    
+                    if (content.includes(searchText)) {
+                        row.style.display = '';
+                        row.classList.add('highlight');
+                    } else {
+                        row.style.display = 'none';
+                        row.classList.remove('highlight');
+                    }
+                });
+            };
+        });
+        function toggleContent(btn) {
+            const td = btn.closest('td');
+            const shortContent = td.querySelector('.short-content');
+            const fullContent = td.querySelector('.full-content');
+            if (shortContent.style.display !== 'none') {
+                shortContent.style.display = 'none';
+                fullContent.style.display = 'inline';
+                btn.textContent = 'moins';
+            } else {
+                shortContent.style.display = 'inline';
+                fullContent.style.display = 'none';
+                btn.textContent = 'plus';
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Facebook
+            const inputFb = document.getElementById('image-facebook');
+            const fileNameFb = document.getElementById('file-name-facebook');
+            if (inputFb) {
+                inputFb.addEventListener('change', function() {
+                    fileNameFb.textContent = this.files[0] ? this.files[0].name : '';
+                });
+            }
+            // LinkedIn
+            const inputLn = document.getElementById('image-linkedin');
+            const fileNameLn = document.getElementById('file-name-linkedin');
+            if (inputLn) {
+                inputLn.addEventListener('change', function() {
+                    fileNameLn.textContent = this.files[0] ? this.files[0].name : '';
+                });
+            }
+        });
+    </script>
+    <script>
+        function openTwitterPopup() {
+            document.getElementById('twitterPopup').style.display = 'block';
+        }
+        function closeTwitterPopup() {
+            document.getElementById('twitterPopup').style.display = 'none';
+        }
+    
+        function openYouTubePopup() {
+            document.getElementById('youtubePopup').style.display = 'block';
+        }
+        function closeYouTubePopup() {
+            document.getElementById('youtubePopup').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
+<style>
+    /* Style pour SweetAlert2 en thème sombre */
+    .dark-swal {
+        background-color: #1e1e1e !important;
+        color: #ffffff !important;
+    }
+    
+    .dark-swal .swal2-title, 
+    .dark-swal .swal2-html-container {
+        color: #ffffff !important;
+    }
+    
+    .dark-swal .swal2-icon.swal2-success {
+        border-color: #28a745 !important;
+    }
+    
+    .dark-swal .swal2-icon.swal2-success [class^='swal2-success-line'] {
+        background-color: #28a745 !important;
+    }
+    
+    .dark-swal .swal2-icon.swal2-success .swal2-success-ring {
+        border-color: #28a745 !important;
+    }
+    
+    .dark-swal .swal2-confirm {
+        background-color: #0080ff !important;
+        color: white !important;
+    }
+</style>
+<script>
+    // Gestion des modals
+    document.addEventListener('DOMContentLoaded', function() {
+        // Éléments du modal Twitter
+        const twitterModal = document.getElementById('twitterModal');
+        const showTwitterModalBtn = document.getElementById('showTwitterModalBtn');
+        const closeTwitterModalBtn = document.getElementById('closeTwitterModalBtn');
+        const closeTwitterModalX = document.getElementById('closeTwitterModalX');
+        
+        // Éléments du modal YouTube
+        const youtubeModal = document.getElementById('youtubeModal');
+        const showYoutubeModalBtn = document.getElementById('showYoutubeModalBtn');
+        const closeYoutubeModalBtn = document.getElementById('closeYoutubeModalBtn');
+        const closeYoutubeModalX = document.getElementById('closeYoutubeModalX');
+        
+        // Gestion du modal Twitter
+        if (showTwitterModalBtn) {
+            showTwitterModalBtn.addEventListener('click', function() {
+                twitterModal.style.display = 'block';
+            });
+        }
+        
+        if (closeTwitterModalBtn) {
+            closeTwitterModalBtn.addEventListener('click', function() {
+                twitterModal.style.display = 'none';
+            });
+        }
+        
+        if (closeTwitterModalX) {
+            closeTwitterModalX.addEventListener('click', function() {
+                twitterModal.style.display = 'none';
+            });
+        }
+        
+        // Gestion du modal YouTube
+        if (showYoutubeModalBtn) {
+            showYoutubeModalBtn.addEventListener('click', function() {
+                youtubeModal.style.display = 'block';
+            });
+        }
+        
+        if (closeYoutubeModalBtn) {
+            closeYoutubeModalBtn.addEventListener('click', function() {
+                youtubeModal.style.display = 'none';
+            });
+        }
+        
+        if (closeYoutubeModalX) {
+            closeYoutubeModalX.addEventListener('click', function() {
+                youtubeModal.style.display = 'none';
+            });
+        }
+        
+        // Fermer les modals en cliquant à l'extérieur
+        window.addEventListener('click', function(event) {
+            if (event.target === twitterModal) {
+                twitterModal.style.display = 'none';
+            }
+            if (event.target === youtubeModal) {
+                youtubeModal.style.display = 'none';
+            }
+        });
+        
+        // Fermer les modals avec la touche Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (twitterModal) twitterModal.style.display = 'none';
+                if (youtubeModal) youtubeModal.style.display = 'none';
+            }
+        });
+    });
+</script>
