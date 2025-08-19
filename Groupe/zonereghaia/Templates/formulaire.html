@@ -1,0 +1,554 @@
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'inscription</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 50%, #000000 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Logo en arrière-plan */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%23dc2626" stroke-width="2" opacity="0.1"/><path d="M30 50 L45 35 L70 60" fill="none" stroke="%23dc2626" stroke-width="3" opacity="0.1"/><circle cx="50" cy="50" r="8" fill="%23dc2626" opacity="0.1"/></svg>') center/contain no-repeat;
+            z-index: 0;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .container {
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid #dc2626;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 
+                0 25px 50px rgba(220, 38, 38, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-link {
+            display: inline-block;
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 24px;
+            border: 2px solid #dc2626;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, transparent, rgba(220, 38, 38, 0.1));
+        }
+
+        .header-link:hover {
+            background: #dc2626;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        h2 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .form-field {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-field label {
+            display: block;
+            color: #e5e7eb;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Styles pour les options des selects personnalisés aussi */
+        .form-field select option {
+            background: #2d2d2d;
+            color: #ffffff;
+            padding: 10px;
+            border: none;
+        }
+
+        .form-field select option:hover {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 
+                0 0 0 3px rgba(220, 38, 38, 0.2),
+                inset 0 0 20px rgba(220, 38, 38, 0.1);
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Styles spécifiques pour les champs Django générés automatiquement */
+        .form-container p {
+            margin-bottom: 25px;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .form-container p:nth-child(1) { animation-delay: 0.1s; }
+        .form-container p:nth-child(2) { animation-delay: 0.2s; }
+        .form-container p:nth-child(3) { animation-delay: 0.3s; }
+        .form-container p:nth-child(4) { animation-delay: 0.4s; }
+
+        .form-container p label {
+            display: block;
+            color: #e5e7eb;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-container p input,
+        .form-container p select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Styles spécifiques pour les options du select */
+        .form-container p select option {
+            background: #2d2d2d;
+            color: #ffffff;
+            padding: 10px;
+            border: none;
+        }
+
+        .form-container p select option:hover {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+        .form-container p select option:checked {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+        .form-container p input:focus,
+        .form-container p select:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 
+                0 0 0 3px rgba(220, 38, 38, 0.2),
+                inset 0 0 20px rgba(220, 38, 38, 0.1);
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .form-container p input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Styles pour les messages d'erreur Django */
+        .errorlist {
+            list-style: none;
+            margin: 5px 0 0 0;
+            padding: 0;
+        }
+
+        .errorlist li {
+            color: #fca5a5;
+            font-size: 12px;
+            margin-top: 5px;
+            padding: 5px 10px;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 6px;
+            border-left: 3px solid #dc2626;
+        }
+
+        /* Styles pour le message de succès */
+        .success-message {
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-message h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 28px;
+            background: linear-gradient(135deg, #10b981, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .success-message p {
+            color: #e5e7eb;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .btn-reset {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-reset:hover {
+            background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        /* Effet de particules */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: #dc2626;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 4px;
+            height: 4px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 3px;
+            height: 3px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+            }
+            33% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            66% {
+                transform: translateY(20px) translateX(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+       
+        
+        {% if success %}
+            <div class="success-message">
+                <div class="success-icon">✓</div>
+                <h2>Inscription Réussie !</h2>
+                <p>Votre inscription a été enregistrée avec succès.</p>
+                <button onclick="resetForm()" class="btn-reset">Nouvelle inscription</button>
+            </div>
+        {% else %}
+            <h2>Remplissez vos informations</h2>
+        {% endif %}
+        
+        <form method="post" class="form-container">
+            {% csrf_token %}
+            
+            <!-- Exemple de champs de formulaire stylisés -->
+            <!-- Utilisez {{ form.as_p }} pour le rendu automatique des champs Django -->
+            {{ form.as_p }}
+            
+            <!-- OU utilisez la version personnalisée ci-dessous pour un contrôle total du design -->
+            <!--
+            <div class="form-field">
+                <label for="id_nom">Nom</label>
+                <input type="text" id="id_nom" name="nom" placeholder="Entrez votre nom" maxlength="100" required>
+            </div>
+            
+            <div class="form-field">
+                <label for="id_prenom">Prénom</label>
+                <input type="text" id="id_prenom" name="prenom" placeholder="Entrez votre prénom" maxlength="100" required>
+            </div>
+            
+            <div class="form-field">
+                <label for="id_numero_carte">Numéro de carte</label>
+                <input type="text" id="id_numero_carte" name="numero_carte" placeholder="Numéro de carte unique" maxlength="18" required>
+            </div>
+            
+            <div class="form-field">
+                <label for="id_taille">Taille</label>
+                <select id="id_taille" name="taille" required>
+                    <option value="">Sélectionnez votre taille</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+            </div>
+            -->
+            
+            <button type="submit" class="submit-btn">IS HERE</button>
+        </form>
+    </div>
+
+    <script>
+        // Animation au scroll et interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input, textarea, select');
+            
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateX(5px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateX(0)';
+                });
+            });
+
+            // Gestion spéciale pour les champs générés par Django (dans des balises <p>)
+            const djangoFields = document.querySelectorAll('.form-container p');
+            djangoFields.forEach(field => {
+                const input = field.querySelector('input, select');
+                if (input) {
+                    input.addEventListener('focus', function() {
+                        field.style.transform = 'translateX(5px)';
+                    });
+                    
+                    input.addEventListener('blur', function() {
+                        field.style.transform = 'translateX(0)';
+                    });
+                }
+            });
+        });
+
+        // Fonction pour réinitialiser le formulaire
+        function resetForm() {
+            document.querySelector('.success-message').style.display = 'none';
+            document.querySelector('.form-container').style.display = 'block';
+            document.querySelector('h2').textContent = 'Remplissez vos informations';
+            
+            // Réinitialiser tous les champs
+            const form = document.querySelector('form');
+            if (form) {
+                form.reset();
+            }
+        }
+    </script>
+</body>
+</html>
+
