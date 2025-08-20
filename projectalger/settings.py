@@ -7,7 +7,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-7(uy6235pof8vv^q686wn
 
 DEBUG =True
 
-ALLOWED_HOSTS = ['zonereghaia.onrender.com']
+ALLOWED_HOSTS = ['travail2-0xl7.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
