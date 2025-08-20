@@ -7,6 +7,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-7(uy6235pof8vv^q686wn
 
 DEBUG =True
 
+'DIRS': [BASE_DIR / "templates"],
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -41,7 +42,7 @@ ROOT_URLCONF = 'projectalger.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+       'DIRS': [BASE_DIR / "templates"],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
