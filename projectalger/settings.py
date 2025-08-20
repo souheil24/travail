@@ -11,7 +11,8 @@ DEBUG =True
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "travail2-0xl7.onrender.com"
+    "travail2-0xl7.onrender.com",
+    ['*']
 ]
 
 
