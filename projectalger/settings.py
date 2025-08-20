@@ -7,7 +7,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-7(uy6235pof8vv^q686wn
 
 DEBUG =True
 
-'DIRS': [BASE_DIR / "templates"],
+
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
