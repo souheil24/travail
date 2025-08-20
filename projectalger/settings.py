@@ -42,7 +42,7 @@ ROOT_URLCONF = 'projectalger.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-       'DIRS': [BASE_DIR / "templates"],  
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Ajouter cette ligne
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -54,6 +54,47 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+pythonINSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'zonereghaia',  # Votre app doit être ici
+]
+
+Après avoir créé le template, committez et poussez :
+
+bashgit add .
+git commit -m "Add formulaire.html template"
+git push
+
+Le template formulaire.html doit contenir quelque chose comme :
+
+html<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulaire d'inscription</title>
+</head>
+<body>
+    {% if success %}
+        <div class="alert alert-success">
+            Inscription réussie !
+        </div>
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">S'inscrire</button>
+    </form>
+</body>
+</html>
+Quelle solution préférez-vous ? Et pouvez-vous me dire où se trouve actuellement votre fichier formulaire.html dans votre structure de projet ?RéessayerClaude n'a pas encore la capacité d'exécuter le code qu'il génère.Claude peut faire des erreurs. Assurez-vous de vérifier ses réponses.
 
 WSGI_APPLICATION ='projectalger.wsgi.application'
 
