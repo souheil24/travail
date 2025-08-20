@@ -6,7 +6,7 @@ def formulaire_view(request):
         form = InscriptionForm(request.POST)
         if form.is_valid():
             form.save()  # si ton form est lié à un modèle
-            return render(request, 'zonereghaia/formulaire.html', {'success': True, 'form': InscriptionForm()})
+            return render(request, 'formulaire.html', {'success': True, 'form': InscriptionForm()})
     else:
         form = InscriptionForm()
-    return render(request, 'zonereghaia/formulaire.html', {'form': form})
+    return render(request, 'formulaire.html', {'form': form})
