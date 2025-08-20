@@ -9,4 +9,4 @@ def formulaire_view(request):
             return render(request, 'formulaire.html', {'success': True, 'form': InscriptionForm()})
     else:
         form = InscriptionForm()
-    return render(request, 'formulaire.html', {'form': form})
+    return render(request, 'zonereghaia/formulaire.html', {'form': form})
