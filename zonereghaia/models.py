@@ -8,8 +8,8 @@ class Inscription(models.Model):
     prenom = models.CharField(max_length=100)
     numero_carte = models.CharField(max_length=18, unique=True)
     taille = models.CharField(
-        max_length=2,
-        choices=[("S", "S"), ("M", "M"), ("L", "L"), ("XL", "XL")]
+        max_length=3,
+        choices=[("S", "S"), ("M", "M"), ("L", "L"), ("XL", "XL"),("XXL","XXL")]
     )
 
     def __str__(self):
